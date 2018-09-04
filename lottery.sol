@@ -49,10 +49,6 @@ contract Lottery {
         return address(this).balance;
     }
     
-    function getParticipantsCount () public view returns(uint256) {
-        return _participants.length;
-    }
-    
     function getOwnerAddress () public view returns(address) {
         return _ownerAddress;
     }
