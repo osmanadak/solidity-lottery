@@ -1,1 +1,1 @@
-solidity-lottery
+# Solidity lottery game
