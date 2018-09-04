@@ -1,1 +1,1 @@
-"# solidity-lottery" 
+solidity-lottery
