@@ -5,30 +5,18 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
 </head>
-<body class="container">
-  <h1></h1>
-  <a href="javascript:;" onclick="buyTicket()" class="btn btn-primary">Buy Ticket</a>
-  <hr>
-  <div>
-    Total contract balance:
-    <span id="totalBalance"></span>
-  </div>
-  <div>
-    Owner Address:
-    <span id="ownerAddress"></span>
-  </div>
-  <hr>
-  <input type="text" id="owner" />
-  <a href="javascript:;" onclick="changeContractOwner()" class="btn btn-primary">Change Owner</a>
-  <hr>
-  <a href="javascript:;" onclick="withdrawAll()" class="btn btn-primary">Withdraw All</a>
-  <hr>
-  <div id="participants">
-    <h3>Participants</h3>
-  </div>
-  <div id="winners">
-    <h3>Winners</h3>
-  </div>
+<body class="container col-md-4 col-md-offset-4">
+    <div id="content">
+        <h1></h1>
+        <a href="javascript:;" onclick="buyTicket()" class="ticket-button" style="font-size: 60px; text-decoration: none;">
+            <img src="http://bitcoin.lift-institute.com/wp-content/themes/twentytwelveLIFT/page-templates/lottery/img/Tickets_2.png" alt="Buy Ticket">
+            <span> 0.1 ETH</span>
+        </a>
+        <hr>
+        <div id="participants"></div>
+        <br><br>
+        <div id="winners"></div>
+    </div>
 </body>
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
