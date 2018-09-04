@@ -44,7 +44,33 @@ $(document).ready(function() {
 
   getOwnerAddress();
   getBalance();
+  getWinners();
+  getParticipants();
 });
+
+function getWinners(){
+  Lottery.getWinners(function (error, result) {
+      if (!error){
+          for (var i = 0; i < result.length; i++) {
+            $('#winners').append("<div class='col-md-12'>"+(i+1)+" - "+result[i]+"</div>");
+          }
+      }else{
+          console.error(error);
+      }
+  });
+}
+
+function getParticipants(){
+  Lottery.getParticipants(function (error, result) {
+      if (!error){
+          for (var i = 0; i < result.length; i++) {
+            $('#participants').append("<div class='col-md-12'>"+(i+1)+" - "+result[i]+"</div>");
+          }
+      }else{
+          console.error(error);
+      }
+  });
+}
 
 function getBalance(){
   Lottery.getContractBalance(function (error, result) {
@@ -54,6 +80,7 @@ function getBalance(){
           console.error(error);
   });
 }
+
 function getOwnerAddress(){
   Lottery.getOwnerAddress(function (error, result) {
       if (!error)
