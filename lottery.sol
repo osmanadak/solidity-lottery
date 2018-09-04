@@ -3,46 +3,46 @@ pragma solidity ^0.4.18;
 contract Lottery {
     uint nonce = 0;
     
-    address public ownerAddress;
-    address[] public participants;
-    address[] public winners;
-    uint numberOfParticipants;
-    uint public sequence = 0;
+    address private _ownerAddress;
+    address[] private _participants;
+    address[] private _winners;
+    uint private _numberOfParticipants;
+    uint private _sequence = 0;
     
     event Draw(address player, uint generatedNumber);
     
     
     function () public payable {}
     
-    constructor(uint _numberOfParticipants, address _ownerAddress) public {
-        numberOfParticipants = _numberOfParticipants;
-        ownerAddress = _ownerAddress;
+    constructor(uint numberOfParticipants, address ownerAddress) public {
+        _numberOfParticipants = numberOfParticipants;
+        _ownerAddress = ownerAddress;
     }
     
     function buyTicket() public payable {
         require(msg.value == 1 ether);
-        participants.push(msg.sender);
-        if(participants.length == numberOfParticipants) {
-            uint randomNumber = uint(keccak256(now, nonce)) % numberOfParticipants;
+        _participants.push(msg.sender);
+        if(_participants.length == _numberOfParticipants) {
+            uint randomNumber = uint(keccak256(now, nonce)) % _numberOfParticipants;
             nonce++;
-            participants[randomNumber].transfer(msg.value*(numberOfParticipants - 1));
-            winners.push(participants[randomNumber]);
-            emit Draw(participants[randomNumber], randomNumber);
-            sequence = 0;
-            participants = new address[](0);
+            _participants[randomNumber].transfer(msg.value*(_numberOfParticipants - 1));
+            _winners.push(_participants[randomNumber]);
+            emit Draw(_participants[randomNumber], randomNumber);
+            _sequence = 0;
+            _participants = new address[](0);
         }else{
-            sequence++;
+            _sequence++;
         }
     }
     
     function withdrawTotalBalance () public payable {
-        require(sequence == 0); //Cant withdraw when participants wait
-        ownerAddress.transfer(address(this).balance);
+        require(_sequence == 0); //Cant withdraw when participants wait
+        _ownerAddress.transfer(address(this).balance);
     }
     
     function setOwnerAddress(address newOwnerAddress) public {
-        require(msg.sender == ownerAddress);
-        ownerAddress = newOwnerAddress;
+        require(msg.sender == _ownerAddress);
+        _ownerAddress = newOwnerAddress;
     }
     
     function getContractBalance () public view returns(uint256) {
@@ -50,10 +50,18 @@ contract Lottery {
     }
     
     function getParticipantsCount () public view returns(uint256) {
-        return participants.length;
+        return _participants.length;
     }
     
     function getOwnerAddress () public view returns(address) {
-        return ownerAddress;
+        return _ownerAddress;
+    }
+    
+    function getWinners () public view returns(address[]) {
+        return _winners;
+    }
+    
+    function getParticipants () public view returns(address[]) {
+        return _participants;
     }
 }
