@@ -20,7 +20,7 @@ contract Lottery {
     }
     
     function buyTicket() public payable {
-        require(msg.value == 1 ether);
+        require(msg.value == 0.1 ether);
         _participants.push(msg.sender);
         if(_participants.length == _numberOfParticipants) {
             uint randomNumber = uint(keccak256(now, nonce)) % _numberOfParticipants;
