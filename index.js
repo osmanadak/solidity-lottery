@@ -27,8 +27,8 @@ function appStart() {
       $('#content').html('<h1>Please install metamask</h1>');
       return false;
     }
-    abi = JSON.parse('[{"anonymous":false,"inputs":[{"indexed":false,"name":"player","type":"address"},{"indexed":false,"name":"generatedNumber","type":"uint256"}],"name":"Draw","type":"event"},{"constant":false,"inputs":[],"name":"buyTicket","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"newOwnerAddress","type":"address"}],"name":"setOwnerAddress","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"withdrawTotalBalance","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"inputs":[{"name":"numberOfParticipants","type":"uint256"},{"name":"ownerAddress","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"constant":true,"inputs":[],"name":"getContractBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getOwnerAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getParticipants","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getParticipantsCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getWinners","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"}]');
-    Lottery = web3js.eth.contract(abi).at('0x3e7940401c5368540b7910821621cf7c8194d271');
+    abi = JSON.parse('[{"constant":true,"inputs":[],"name":"getOwnerAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwnerAddress","type":"address"}],"name":"setOwnerAddress","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getParticipants","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getContractBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getWinners","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawTotalBalance","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"buyTicket","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"inputs":[{"name":"numberOfParticipants","type":"uint256"},{"name":"ownerAddress","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"player","type":"address"},{"indexed":false,"name":"generatedNumber","type":"uint256"}],"name":"Draw","type":"event"}]');
+    Lottery = web3js.eth.contract(abi).at('0xe0343bea59c5bfc4a908d2302924caf03716e8b9');
   
     getOwnerAddress();
     getBalance();
@@ -61,7 +61,7 @@ function appStart() {
     Lottery.getParticipants(function (error, result) {
         if (!error){
             if(result.length > 0){
-                $('#participants').html('<h3>Participants</h3>');
+                $('#participants').html('<h3>Participants of Current Round</h3>');
                 for (var i = 0; i < result.length; i++) {
                     $('#participants').append("<div class='col-md-12'>"+(i+1)+" - "+result[i]+"</div>");
                 }
